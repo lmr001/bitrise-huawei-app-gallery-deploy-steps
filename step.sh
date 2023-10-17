@@ -276,6 +276,40 @@ function getSubmissionStatus() {
   echo "$response" >resultSubmissionStatus.json
 }
 
+function setNewFeaturesDescription(){
+ if [ -n "$new_features_description" ]; then
+    ACCESS_TOKEN=$(jq -r '.access_token' token.json)
+    JSON_STRING="{\"lang\":\"en-GB\",\"newFeatures\":\"$new_features_description\"}"
+
+    printf "\nSetting the New Features description...\n"
+
+    response=$(curl --silent -X PUT \
+      'https://connect-api.cloud.huawei.com/api/publish/v2/app-language-info?appid='"$huawei_app_id"'' \
+      -H 'Authorization: Bearer '"${ACCESS_TOKEN}"'' \
+      -H 'Content-Type: application/json' \
+      -H 'client_id: '"${huawei_client_id}"'' \
+      -d "${JSON_STRING}" || true)
+
+    if [[ -z "$response" ]]; then
+      printf "\n ❌ An error occurred while setting the description for New Features on AppGallery Connect. Check your network connection and your credentials 😢\n"
+      exit 1
+    fi
+
+    echo "$response" >new_features_description.json
+
+    CODE=$(jq -r '.ret.code' new_features_description.json)
+    if [ "${CODE}" != "0" ]; then
+      printf "\n ❌ An error occurred while setting the description for New Features on AppGallery Connect 😢\n. Please check the response for further details.\n"
+      echo "$response"
+      exit 1
+    fi
+
+    printf "\nSetting the New Features description ✅\n"
+  else
+    printf "\n ❌ New features description is empty 😢\n"
+  fi
+}
+
 getToken
 
 getFileUploadUrl
@@ -283,6 +317,8 @@ getFileUploadUrl
 uploadFile
 
 updateAppFileInfo
+
+setNewFeaturesDescription
 
 printf "\nSubmitting app as a Draft...⏳\n"
 

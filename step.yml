@@ -4,8 +4,8 @@ description: |-
   Uploads and releases apps to Huawei App Gallery.
 
   This step is based on [AppGallery Connect API](https://developer.huawei.com/consumer/en/doc/development/AppGallery-connect-Guides/agcapi-getstarted)
-website: https://github.com/ferPrieto/steps-app-gallery-deploy
-source_code_url: https://github.com/ferPrieto/steps-app-gallery-deploy
+website: https://github.com/lmr001/bitrise-huawei-app-gallery-deploy-steps
+source_code_url: https://github.com/lmr001/bitrise-huawei-app-gallery-deploy-steps
 support_url: https://github.com/ferPrieto/steps-app-gallery-deploy/issues
 published_at: 2021-02-24T19:15:16.844179195Z
 host_os_tags:
@@ -104,6 +104,14 @@ inputs:
       value_options:
         - "true"
         - "false"
+
+  - new_features_description: 
+    opts:
+      category: Config
+      title: New features description. 
+      description: Set the description for the `New features` section. [NOTE:] There is a 1000 character limit.
+      is_expand: true
+      is_required: false 
 
   - phase_release_start_time:
     opts:

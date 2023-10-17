@@ -15,10 +15,11 @@ app:
   - PHASE_RELEASE_PERCENTAGE: ${PHASE_RELEASE_PERCENTAGE}
   - PHASE_RELEASE_DESCRIPTION: ${PHASE_RELEASE_DESCRIPTION}
   - SUBMIT_FOR_REVIEW: ${SUBMIT_FOR_REVIEW}
+  - NEW_FEATURES_DESCRIPTION: ${NEW_FEATURES_DESCRIPTION}
   # If you want to share this step into a StepLib
-  - BITRISE_STEP_ID: steps-app-gallery-deploy
-  - BITRISE_STEP_VERSION: "1.5.3"
-  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/ferPrieto/steps-app-gallery-deploy.git
+  - BITRISE_STEP_ID: huawei-app-gallery-deploy-steps
+  - BITRISE_STEP_VERSION: "1.0.0"
+  - BITRISE_STEP_GIT_CLONE_URL: https://github.com/lmr001/bitrise-huawei-app-gallery-deploy-steps.git
   - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
 
 workflows:
@@ -56,6 +57,7 @@ workflows:
         - phase_release_percentage: ${PHASE_RELEASE_PERCENTAGE}
         - phase_release_description: ${PHASE_RELEASE_DESCRIPTION}
         - submit_for_review: ${SUBMIT_FOR_REVIEW}
+        - new_features_description: ${NEW_FEATURES_DESCRIPTION}
 
   # ----------------------------------------------------------------
   # --- workflows to Share this step into a Step Library
